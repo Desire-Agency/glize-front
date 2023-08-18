@@ -476,7 +476,7 @@ const LimitOrders = () => {
                       </Button>
                     )}
                   </Box>
-                  <Flex mt="16px" justifyContent="center">
+                  {/* <Flex mt="16px" justifyContent="center">
                     <Link external href="https://www.gelato.network/">
                       <img
                         src={
@@ -487,7 +487,7 @@ const LimitOrders = () => {
                         height="48px"
                       />
                     </Link>
-                  </Flex>
+                  </Flex> */}
                 </Wrapper>
               </AppBody>
             </StyledInputCurrencyWrapper>

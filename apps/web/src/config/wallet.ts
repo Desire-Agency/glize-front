@@ -67,29 +67,6 @@ const walletsConfig = ({
       downloadLink: 'https://metamask.app.link/dapp/pancakeswap.finance/',
     },
     {
-      id: 'binance',
-      title: 'Binance Wallet',
-      icon: '/images/wallets/binance.png',
-      get installed() {
-        return typeof window !== 'undefined' && Boolean(window.BinanceChain)
-      },
-      connectorId: ConnectorNames.BSC,
-      guide: {
-        desktop: 'https://www.bnbchain.org/en/binance-wallet',
-      },
-      downloadLink: {
-        desktop: isFirefox
-          ? 'https://addons.mozilla.org/en-US/firefox/addon/binance-chain/?src=search'
-          : 'https://chrome.google.com/webstore/detail/binance-wallet/fhbohimaelbohpjbbldcngcnapndodjp',
-      },
-    },
-    {
-      id: 'coinbase',
-      title: 'Coinbase Wallet',
-      icon: '/images/wallets/coinbase.png',
-      connectorId: ConnectorNames.WalletLink,
-    },
-    {
       id: 'trust',
       title: 'Trust Wallet',
       icon: '/images/wallets/trust.png',
@@ -106,64 +83,6 @@ const walletsConfig = ({
       qrCode,
     },
     {
-      id: 'walletconnect',
-      title: 'WalletConnect',
-      icon: '/images/wallets/walletconnect.png',
-      connectorId: ConnectorNames.WalletConnect,
-    },
-    {
-      id: 'opera',
-      title: 'Opera Wallet',
-      icon: '/images/wallets/opera.png',
-      connectorId: ConnectorNames.Injected,
-      get installed() {
-        return typeof window !== 'undefined' && Boolean(window.ethereum?.isOpera)
-      },
-      downloadLink: 'https://www.opera.com/crypto/next',
-    },
-    {
-      id: 'brave',
-      title: 'Brave Wallet',
-      icon: '/images/wallets/brave.png',
-      connectorId: ConnectorNames.Injected,
-      get installed() {
-        return typeof window !== 'undefined' && Boolean(window.ethereum?.isBraveWallet)
-      },
-      downloadLink: 'https://brave.com/wallet/',
-    },
-    {
-      id: 'math',
-      title: 'MathWallet',
-      icon: '/images/wallets/mathwallet.png',
-      connectorId: ConnectorNames.Injected,
-      get installed() {
-        return typeof window !== 'undefined' && Boolean(window.ethereum?.isMathWallet)
-      },
-      qrCode,
-    },
-    {
-      id: 'tokenpocket',
-      title: 'TokenPocket',
-      icon: '/images/wallets/tokenpocket.png',
-      connectorId: ConnectorNames.Injected,
-      get installed() {
-        return typeof window !== 'undefined' && Boolean(window.ethereum?.isTokenPocket)
-      },
-      qrCode,
-    },
-    {
-      id: 'safepal',
-      title: 'SafePal',
-      icon: '/images/wallets/safepal.png',
-      connectorId: ConnectorNames.Injected,
-      get installed() {
-        return typeof window !== 'undefined' && Boolean((window.ethereum as ExtendEthereum)?.isSafePal)
-      },
-      downloadLink:
-        'https://chrome.google.com/webstore/detail/safepal-extension-wallet/lgmpcpglpngdoalbgeoldeajfclnhafa',
-      qrCode,
-    },
-    {
       id: 'coin98',
       title: 'Coin98',
       icon: '/images/wallets/coin98.png',
@@ -175,23 +94,6 @@ const walletsConfig = ({
         )
       },
       qrCode,
-    },
-    {
-      id: 'blocto',
-      title: 'Blocto',
-      icon: '/images/wallets/blocto.png?v=2',
-      connectorId: ConnectorNames.Blocto,
-      get installed() {
-        return typeof window !== 'undefined' && Boolean((window.ethereum as ExtendEthereum)?.isBlocto)
-          ? true
-          : undefined // undefined to show SDK
-      },
-    },
-    {
-      id: 'ledger',
-      title: 'Ledger',
-      icon: '/images/wallets/ledger.png',
-      connectorId: ConnectorNames.Ledger,
     },
   ]
 }
