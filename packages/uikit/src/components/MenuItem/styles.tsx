@@ -3,6 +3,11 @@ import { StyledMenuItemProps } from "./types";
 
 export const StyledMenuItemContainer = styled.div<StyledMenuItemProps>`
   position: relative;
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 
   ${({ $isActive, $variant, theme }) =>
     $isActive &&
@@ -30,6 +35,8 @@ const StyledMenuItem = styled.a<StyledMenuItemProps>`
   font-weight: ${({ $isActive }) => ($isActive ? "600" : "400")};
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.5 : 1)};
   pointer-events: ${({ $isDisabled }) => ($isDisabled ? "none" : "inherit")};
+  background: ${({ theme }) => theme.colors.tertiary};
+  border-radius: 20px;
 
   ${({ $statusColor, theme }) =>
     $statusColor &&
@@ -44,20 +51,20 @@ const StyledMenuItem = styled.a<StyledMenuItemProps>`
     }
   `}
 
-  ${({ $variant }) =>
+  ${({ $variant, theme }) =>
     $variant === "default"
       ? `
-    padding: 0 16px;
-    height: 48px;
+    padding: 0 20px;
+    height: 46px;
+    background: ${theme.colors.tertiary};
   `
       : `
     padding: 4px 4px 0px 4px;
     height: 42px;
   `}
 
-  &:hover {
-    background: ${({ theme }) => theme.colors.tertiary};
-    ${({ $variant }) => $variant === "default" && "border-radius: 16px;"};
+  ${({ theme }) => theme.mediaQueries.xl} {
+    height: 68px;
   }
 `;
 

@@ -11,15 +11,12 @@ import {
   ModalWrapper,
   MoreHorizontalIcon,
   SvgProps,
-  Tab,
-  TabMenu,
   Text,
   WarningIcon,
 } from '@pancakeswap/uikit'
 import { atom, useAtom } from 'jotai'
 import { lazy, PropsWithChildren, Suspense, useMemo, useState } from 'react'
 import { isMobile } from 'react-device-detect'
-import { StepIntro } from './components/Intro'
 import {
   desktopWalletSelectionClass,
   modalWrapperClass,
@@ -59,9 +56,9 @@ interface WalletModalV2Props<T = unknown> extends ModalV2Props {
   docText: string
 }
 
-export class WalletConnectorNotFoundError extends Error {}
+export class WalletConnectorNotFoundError extends Error { }
 
-export class WalletSwitchChainError extends Error {}
+export class WalletSwitchChainError extends Error { }
 
 const errorAtom = atom<string>('')
 
@@ -73,31 +70,19 @@ export function useSelectedWallet<T>() {
 }
 
 const TabContainer = ({ children, docLink, docText }: PropsWithChildren<{ docLink: string; docText: string }>) => {
-  const [index, setIndex] = useState(0)
-  const { t } = useTranslation()
 
   return (
     <AtomBox position="relative" zIndex="modal" className={modalWrapperClass}>
-      <AtomBox position="absolute" style={{ top: '-50px' }}>
-        <TabMenu activeIndex={index} onItemClick={setIndex} gap="0px" isColorInverse>
-          <Tab>{t('Connect Wallet')}</Tab>
-          <Tab>{t('What’s a Web3 Wallet?')}</Tab>
-        </TabMenu>
-      </AtomBox>
       <AtomBox
         display="flex"
         position="relative"
         background="gradientCardHeader"
         borderRadius="card"
-        borderBottomRadius={{
-          xs: '0',
-          md: 'card',
-        }}
+        borderBottomRadius={{ xs: '0', md: 'card' }}
         zIndex="modal"
         width="full"
       >
-        {index === 0 && children}
-        {index === 1 && <StepIntro docLink={docLink} docText={docText} />}
+        {children}
       </AtomBox>
     </AtomBox>
   )
@@ -507,12 +492,12 @@ const getDesktopLink = (linkDevice: LinkOfDevice) =>
   typeof linkDevice === 'string'
     ? linkDevice
     : typeof linkDevice.desktop === 'string'
-    ? linkDevice.desktop
-    : linkDevice.desktop?.url
+      ? linkDevice.desktop
+      : linkDevice.desktop?.url
 
 const getDesktopText = (linkDevice: LinkOfDevice, fallback: string) =>
   typeof linkDevice === 'string'
     ? fallback
     : typeof linkDevice.desktop === 'string'
-    ? fallback
-    : linkDevice.desktop?.text ?? fallback
+      ? fallback
+      : linkDevice.desktop?.text ?? fallback

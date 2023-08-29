@@ -1,21 +1,5 @@
-import {
-  MenuItemsType,
-  DropdownMenuItemType,
-  SwapIcon,
-  SwapFillIcon,
-  EarnFillIcon,
-  EarnIcon,
-  TrophyIcon,
-  TrophyFillIcon,
-  NftIcon,
-  NftFillIcon,
-  MoreIcon,
-  DropdownMenuItems,
-} from '@pancakeswap/uikit'
+import { MenuItemsType, DropdownMenuItems } from '@pancakeswap/uikit'
 import { ContextApi } from '@pancakeswap/localization'
-import { nftsBaseUrl } from 'views/Nft/market/constants'
-import { getPerpetualUrl } from 'utils/getPerpetualUrl'
-import { SUPPORT_ONLY_BSC } from 'config/constants/supportChains'
 
 export type ConfigMenuDropDownItemsType = DropdownMenuItems & { hideSubNav?: boolean }
 export type ConfigMenuItemsType = Omit<MenuItemsType, 'items'> & { hideSubNav?: boolean; image?: string } & {
@@ -43,45 +27,28 @@ const config: (
 ) => ConfigMenuItemsType[] = (t, isDark, languageCode, chainId) =>
   [
     {
-      label: t('Trade'),
-      icon: SwapIcon,
-      fillIcon: SwapFillIcon,
+      label: t('Swap'),
       href: '/swap',
       showItemsOnMobile: false,
-      items: [
-        {
-          label: t('Swap'),
-          href: '/swap',
-        },
-        {
-          label: t('Limit'),
-          href: '/limit-orders',
-          supportChainIds: SUPPORT_ONLY_BSC,
-          image: '/images/decorations/3d-coin.png',
-        },
-        {
-          label: t('Liquidity'),
-          href: '/liquidity',
-        },
-      ].map((item) => addMenuItemSupported(item, chainId)),
+      items: [],
     },
     {
-      label: t('Earn'),
+      label: t('Liquidity'),
+      href: '/liquidity',
+      showItemsOnMobile: false,
+      items: [],
+    },
+    {
+      label: t('Farms'),
       href: '/farms',
-      icon: EarnIcon,
-      fillIcon: EarnFillIcon,
-      image: '/images/decorations/pe2.png',
-      items: [
-        {
-          label: t('Farms'),
-          href: '/farms',
-        },
-        {
-          label: t('Pools'),
-          href: '/pools',
-          supportChainIds: SUPPORT_ONLY_BSC,
-        },
-      ].map((item) => addMenuItemSupported(item, chainId)),
+      showItemsOnMobile: false,
+      items: [],
+    },
+    {
+      label: t('Pools'),
+      href: '/pools',
+      showItemsOnMobile: false,
+      items: [],
     },
   ].map((item) => addMenuItemSupported(item, chainId))
 

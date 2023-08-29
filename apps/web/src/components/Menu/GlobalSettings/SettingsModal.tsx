@@ -48,25 +48,25 @@ const ScrollableContainer = styled(Flex)`
 
 export const withCustomOnDismiss =
   (Component) =>
-  ({
-    onDismiss,
-    customOnDismiss,
-    mode,
-    ...props
-  }: {
-    onDismiss?: () => void
-    customOnDismiss: () => void
-    mode: SettingsMode
-  }) => {
-    const handleDismiss = useCallback(() => {
-      onDismiss?.()
-      if (customOnDismiss) {
-        customOnDismiss()
-      }
-    }, [customOnDismiss, onDismiss])
+    ({
+      onDismiss,
+      customOnDismiss,
+      mode,
+      ...props
+    }: {
+      onDismiss?: () => void
+      customOnDismiss: () => void
+      mode: SettingsMode
+    }) => {
+      const handleDismiss = useCallback(() => {
+        onDismiss?.()
+        if (customOnDismiss) {
+          customOnDismiss()
+        }
+      }, [customOnDismiss, onDismiss])
 
-    return <Component {...props} mode={mode} onDismiss={handleDismiss} />
-  }
+      return <Component {...props} mode={mode} onDismiss={handleDismiss} />
+    }
 
 const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ onDismiss, mode }) => {
   const [showConfirmExpertModal, setShowConfirmExpertModal] = useState(false)
@@ -112,13 +112,6 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
         {mode === SettingsMode.GLOBAL && (
           <>
             <Flex pb="24px" flexDirection="column">
-              <Text bold textTransform="uppercase" fontSize="18px" color="secondary" mb="24px">
-                {t('Global')}
-              </Text>
-              <Flex justifyContent="space-between" mb="24px">
-                <Text>{t('Dark mode')}</Text>
-                <ThemeSwitcher isDark={isDark} toggleTheme={() => setTheme(isDark ? 'light' : 'dark')} />
-              </Flex>
               <Flex justifyContent="space-between" alignItems="center" mb="24px">
                 <Flex alignItems="center">
                   <Text>{t('Subgraph Health Indicator')}</Text>

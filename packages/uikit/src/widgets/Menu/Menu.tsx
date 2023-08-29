@@ -24,18 +24,35 @@ const Wrapper = styled.div`
   grid-template-rows: auto 1fr;
 `;
 
+const LogoWrap = styled.div`
+  padding: 10px;
+  background-color: ${({ theme }) => theme.colors.tertiary};
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 10px 34px;
+  }
+`;
+
 const StyledNav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: ${MENU_HEIGHT}px;
-  background-color: ${({ theme }) => theme.nav.background};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  height: ${MOBILE_MENU_HEIGHT}px;
+  background: ${({ theme }) => theme.colors.background};
+  border-bottom: 0;
   transform: translate3d(0, 0, 0);
 
   padding-left: 16px;
   padding-right: 16px;
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    height: ${MENU_HEIGHT}px;
+  }
 `;
 
 const FixedContainer = styled.div<{ showMenu: boolean; height: number }>`
@@ -52,7 +69,7 @@ const TopBannerContainer = styled.div<{ height: number }>`
   height: ${({ height }) => `${height}px`};
   min-height: ${({ height }) => `${height}px`};
   max-height: ${({ height }) => `${height}px`};
-  width: 100%;
+  width: 100%; 
 `;
 
 const BodyWrapper = styled(Box)`
@@ -93,8 +110,8 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   const refPrevOffset = useRef(typeof window === "undefined" ? 0 : window.pageYOffset);
 
   const topBannerHeight = isMobile ? TOP_BANNER_HEIGHT_MOBILE : TOP_BANNER_HEIGHT;
-
   const totalTopMenuHeight = isMounted && banner ? MENU_HEIGHT + topBannerHeight : MENU_HEIGHT;
+  console.log(totalTopMenuHeight)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -107,7 +124,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
       }
       // Avoid triggering anything at the bottom because of layout shift
       else if (!isBottomOfPage) {
-        if (currentOffset < refPrevOffset.current || currentOffset <= totalTopMenuHeight) {
+        if (currentOffset < refPrevOffset.current || currentOffset <= topBannerHeight) {
           // Has scroll up
           setShowMenu(true);
         } else {
@@ -123,7 +140,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
     return () => {
       window.removeEventListener("scroll", throttledHandleScroll);
     };
-  }, [totalTopMenuHeight]);
+  }, [topBannerHeight]);
 
   // Find the home link if provided
   const homeLink = links.find((link) => link.label === "Home");
@@ -133,21 +150,17 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   const providerValue = useMemo(() => ({ linkComponent }), [linkComponent]);
   return (
     <MenuContext.Provider value={providerValue}>
-      <AtomBox
-        asChild
-        minHeight={{
-          xs: "auto",
-          md: "100vh",
-        }}
-      >
+      <AtomBox asChild minHeight={{ xs: "auto", md: "100vh" }}>
         <Wrapper>
           <FixedContainer showMenu={showMenu} height={totalTopMenuHeight}>
-            {banner && isMounted && <TopBannerContainer height={topBannerHeight}>{banner}</TopBannerContainer>}
+            {banner && isMounted && <TopBannerContainer height={totalTopMenuHeight}>{banner}</TopBannerContainer>}
             <StyledNav>
               <Flex>
-                <Logo href={homeLink?.href ?? "/"} />
+                <LogoWrap>
+                  <Logo href={homeLink?.href ?? "/"} />
+                </LogoWrap>
                 <AtomBox display={{ xs: "none", md: "block" }}>
-                  <MenuItems items={links} activeItem={activeItem} activeSubItem={activeSubItem} ml="24px" />
+                  <MenuItems items={links} activeItem={activeItem} activeSubItem={activeSubItem} ml="10px" />
                 </AtomBox>
               </Flex>
               <Flex alignItems="center" height="100%">
@@ -170,16 +183,10 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
           </FixedContainer>
           {subLinks ? (
             <Flex justifyContent="space-around" overflow="hidden">
-              <SubMenuItems
-                items={subLinksWithoutMobile}
-                mt={`${totalTopMenuHeight + 1}px`}
-                activeItem={activeSubItem}
-              />
-
+              <SubMenuItems items={subLinksWithoutMobile} activeItem={activeSubItem} />
               {subLinksMobileOnly && subLinksMobileOnly?.length > 0 && (
                 <SubMenuItems
                   items={subLinksMobileOnly}
-                  mt={`${totalTopMenuHeight + 1}px`}
                   activeItem={activeSubItem}
                   isMobileOnly
                 />
@@ -188,7 +195,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
           ) : (
             <div />
           )}
-          <BodyWrapper mt={!subLinks ? `${totalTopMenuHeight + 1}px` : "0"}>
+          <BodyWrapper mt={`${topBannerHeight}px`}>
             <Inner>{children}</Inner>
           </BodyWrapper>
         </Wrapper>

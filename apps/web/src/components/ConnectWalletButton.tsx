@@ -36,7 +36,7 @@ const ConnectWalletButton = ({ children, ...props }: ButtonProps) => {
 
   return (
     <>
-      <Button onClick={handleClick} {...props}>
+      <Button onClick={handleClick} {...props} style={{ color: "#fff", padding: "24px 40px", borderRadius: "50px", background: "linear-gradient(135deg, #EE8EFF 0%, #D400F9 100%)" }}>
         {children || <Trans>Connect Wallet</Trans>}
       </Button>
       <WalletModalV2

@@ -7,20 +7,24 @@ import { UserMenuProps, variants } from "./types";
 import MenuIcon from "./MenuIcon";
 import { UserMenuItem } from "./styles";
 
-export const StyledUserMenu = styled(Flex)`
+export const StyledUserMenu: any = styled(Flex)`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.tertiary};
-  border-radius: 16px;
-  box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
   cursor: pointer;
   display: inline-flex;
-  height: 32px;
-  padding-left: 32px;
+  align-items: center;
+  height: 44px;
+  padding-left: 40px;
   padding-right: 8px;
   position: relative;
 
   &:hover {
     opacity: 0.65;
+  }
+
+  ${({ theme }) => theme.mediaQueries.xl} {
+    height: 68px;
   }
 `;
 
@@ -53,7 +57,7 @@ const Menu = styled.div<{ isOpen: boolean }>`
     pointer-events: none;
     visibility: hidden;
   `}
-
+x
   ${UserMenuItem}:first-child {
     border-radius: 8px 8px 0 0;
   }
