@@ -63,10 +63,10 @@ const Home: React.FC<React.PropsWithChildren> = () => {
   ])
 
   const [dataMyStats, setDataMyStats] = useState([
-    { label: t('My Farm Rewards'), values: ["0.000", "0.000"] },
-    { label: t('My NFT Bonus'), values: ["0.000", "0.000"] },
-    { label: t('My Spacebase Rewards'), values: ["0.000", "0.000"] },
-    { label: t('My Total Rewards'), values: ["0.000", "0.000"] },
+    { label: t('My Farm Rewards'), values: ["0.342", "0.425"] },
+    { label: t('My NFT Bonus'), values: ["0.522", "0.34"] },
+    { label: t('My Spacebase Rewards'), values: ["0.342", "0.234"] },
+    { label: t('My Total Rewards'), values: ["0.53", "0.5234"] },
   ])
 
   const [dataPairs, setDataPairs] = useState<ITablePairRow[]>([

@@ -111,7 +111,6 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
 
   const topBannerHeight = isMobile ? TOP_BANNER_HEIGHT_MOBILE : TOP_BANNER_HEIGHT;
   const totalTopMenuHeight = isMounted && banner ? MENU_HEIGHT + topBannerHeight : MENU_HEIGHT;
-  console.log(totalTopMenuHeight)
 
   useEffect(() => {
     const handleScroll = () => {
