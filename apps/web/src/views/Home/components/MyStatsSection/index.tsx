@@ -50,8 +50,6 @@ const StyledHeading = styled(Heading)`
 `
 
 const StyledItem = styled(Flex)`
-  flex-wrap: wrap;
-  gap: 40px 20px;
   position: relative;
   width: 100%;
   height: 100%;
@@ -82,16 +80,18 @@ const MyStatsSection = ({ data }: Props) => {
               <Trans>Connect Wallet</Trans>
             </ConnectWalletButton>
           </StyledSectionWallet>}
-        {data.map((item: { label: string, values: string[] }, i: number) => (
-          <Flex flexDirection="column" width="calc(50% - 10px)" key={`${i.toString()}`}>
-            <Text color="textGray" mb="5px" fontSize="14px">
-              {item.label}
-            </Text>
-            {item.values.map((str: string, index: number) => (
-              <Text color="textSubtle" fontSize="18px" key={`${index.toString()}`}>{account ? str : "0.00"}</Text>
-            ))}
-          </Flex>
-        ))}
+        <Flex flexWrap="wrap" style={{ gap: "40px 20px" }}>
+          {data.map((item: { label: string, values: string[] }, i: number) => (
+            <Flex flexDirection="column" width="calc(50% - 10px)" key={`${i.toString()}`}>
+              <Text color="textGray" mb="5px" fontSize="14px">
+                {item.label}
+              </Text>
+              {item.values.map((str: string, index: number) => (
+                <Text color="textSubtle" fontSize="18px" key={`${index.toString()}`}>{account ? str : "0.00"}</Text>
+              ))}
+            </Flex>
+          ))}
+        </Flex>
       </StyledItem>
     </StyledWrapSection>
   )
