@@ -15,18 +15,20 @@ const MenuIconWrapper = styled.div<{ borderColor: keyof Colors }>`
   display: flex;
   height: 32px;
   justify-content: center;
-  left: 0;
+  left: 10px;
   position: absolute;
-  top: 0;
+  top: 50%;
   width: 32px;
   z-index: 102;
+  transform: translate(0, -50%);
 `;
 
 const ProfileIcon = styled(Image)`
-  left: 0;
+  left: 10px;
   position: absolute;
-  top: 0;
+  top: 50%;
   z-index: 102;
+  transform: translate(0, -50%);
 
   & > img {
     border-radius: 50%;

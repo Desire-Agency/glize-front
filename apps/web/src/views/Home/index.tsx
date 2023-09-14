@@ -1,170 +1,97 @@
+import { useState } from 'react'
 import styled from 'styled-components'
-import { PageSection } from '@pancakeswap/uikit'
-import { useAccount } from 'wagmi'
-import useTheme from 'hooks/useTheme'
-import Container from 'components/Layout/Container'
+import { Flex } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
+import { useAccount } from 'wagmi'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { ChainId } from '@pancakeswap/sdk'
-import Hero from './components/Hero'
-import { swapSectionData, earnSectionData, cakeSectionData } from './components/SalesSection/data'
-import MetricsSection from './components/MetricsSection'
-import SalesSection from './components/SalesSection'
-import WinSection from './components/WinSection'
-import FarmsPoolsRow from './components/FarmsPoolsRow'
-import Footer from './components/Footer'
-import CakeDataRow from './components/CakeDataRow'
-import { WedgeTopLeft, InnerWedgeWrapper, OuterWedgeWrapper, WedgeTopRight } from './components/WedgeSvgs'
 import UserBanner from './components/UserBanner'
-import MultipleBanner from './components/Banners/MultipleBanner'
+import VolumeSection from './components/VolumeSection'
+import StatsSection from './components/StatsSection'
+import MyStatsSection from './components/MyStatsSection'
+import PairsSection, { ITablePairRow } from './components/PairsSection'
 
-const StyledHeroSection = styled(PageSection)`
-  padding-top: 16px;
+const StyledHome = styled(Flex)`
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 20px;
 
-  ${({ theme }) => theme.mediaQueries.md} {
-    padding-top: 48px;
+  ${({ theme }) => theme.mediaQueries.xl} {
+    gap: 40px;
+    margin-top: 40px;
   }
 `
 
-const UserBannerWrapper = styled(Container)`
-  z-index: 1;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-  padding-left: 0px;
-  padding-right: 0px;
+const StyledTopSec = styled("div")`
+  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
 
-  ${({ theme }) => theme.mediaQueries.lg} {
-    padding-left: 24px;
-    padding-right: 24px;
+  ${({ theme }) => theme.mediaQueries.xl} {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
   }
+`
+
+const UserBannerWrapper = styled(Flex)`
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: ${({ theme }) => theme.colors.tertiary};
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
 `
 
 const Home: React.FC<React.PropsWithChildren> = () => {
-  const { theme } = useTheme()
   const { address: account } = useAccount()
   const { chainId } = useActiveChainId()
+  const { t } = useTranslation();
 
-  const HomeSectionContainerStyles = { margin: '0', width: '100%', maxWidth: '968px' }
+  const [dataStats, setDataStats] = useState([
+    { label: t('Price'), val: "$ 0.079" },
+    { label: t('Market Cap'), val: "$ 0" },
+    { label: t('DAO Locked'), val: "0.000" },
+    { label: t('Trade Mining Reward (Locked) '), val: "0.000" },
+    { label: t('DAO Locked'), val: "0.000" },
+    { label: t('Circulating'), val: "0.000" },
+    { label: t('Current Total Supply'), val: "0.000" },
+  ])
 
-  const { t } = useTranslation()
+  const [dataMyStats, setDataMyStats] = useState([
+    { label: t('My Farm Rewards'), values: ["0.342", "0.425"] },
+    { label: t('My NFT Bonus'), values: ["0.522", "0.34"] },
+    { label: t('My Spacebase Rewards'), values: ["0.342", "0.234"] },
+    { label: t('My Total Rewards'), values: ["0.53", "0.5234"] },
+  ])
+
+  const [dataPairs, setDataPairs] = useState<ITablePairRow[]>([
+    { imgTokenUrl: "https://tokens.pancakeswap.finance/images/0x3019BF2a2eF8040C242C9a4c5c4BD4C81678b2A1.png", name: "ETH-USDT", liquidity: 234, volumeDay: 125, volumeWeek: 536, fees: 123, apy: 6434 },
+    { imgTokenUrl: "https://tokens.pancakeswap.finance/images/0x16faF9DAa401AA42506AF503Aa3d80B871c467A3.png", name: "BTC-USDT", liquidity: 423, volumeDay: 5436, volumeWeek: 435, fees: 677, apy: 5435 },
+    { imgTokenUrl: "https://tokens.pancakeswap.finance/images/0x374Ca32fd7934c5d43240E1e73fa9B2283468609.png", name: "TEX-USDT", liquidity: 23, volumeDay: 236, volumeWeek: 366, fees: 647, apy: 5345 },
+    { imgTokenUrl: "https://tokens.pancakeswap.finance/images/0x91d6d6aF7635B7b23A8CED9508117965180e2362.png", name: "KRR-USDT", liquidity: 124, volumeDay: 657, volumeWeek: 345, fees: 678, apy: 733 },
+    { imgTokenUrl: "https://tokens.pancakeswap.finance/images/0x724A32dFFF9769A0a0e1F0515c0012d1fB14c3bd.png", name: "WRE-USDT", liquidity: 324, volumeDay: 345, volumeWeek: 657, fees: 456, apy: 37 }
+  ])
 
   return (
     <>
-      <style jsx global>
-        {`
-          #home-1 .page-bg {
-            background: linear-gradient(139.73deg, #e6fdff 0%, #f3efff 100%);
-          }
-          [data-theme='dark'] #home-1 .page-bg {
-            background: radial-gradient(103.12% 50% at 50% 50%, #21193a 0%, #191326 100%);
-          }
-          #home-2 .page-bg {
-            background: linear-gradient(180deg, #ffffff 22%, #d7caec 100%);
-          }
-          [data-theme='dark'] #home-2 .page-bg {
-            background: linear-gradient(180deg, #09070c 22%, #201335 100%);
-          }
-          #home-3 .page-bg {
-            background: linear-gradient(180deg, #6fb6f1 0%, #eaf2f6 100%);
-          }
-          [data-theme='dark'] #home-3 .page-bg {
-            background: linear-gradient(180deg, #0b4576 0%, #091115 100%);
-          }
-          #home-4 .inner-wedge svg {
-            fill: #d8cbed;
-          }
-          [data-theme='dark'] #home-4 .inner-wedge svg {
-            fill: #201335;
-          }
-        `}
-      </style>
-      <StyledHeroSection
-        innerProps={{ style: { margin: '0', width: '100%' } }}
-        containerProps={{
-          id: 'home-1',
-        }}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        {account && chainId === ChainId.BSC && (
-          <UserBannerWrapper>
-            <UserBanner />
-          </UserBannerWrapper>
-        )}
-        <MultipleBanner />
-        <Hero />
-      </StyledHeroSection>
-      <PageSection
-        innerProps={{ style: { margin: '0', width: '100%' } }}
-        containerProps={{
-          id: 'home-2',
-        }}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <MetricsSection />
-      </PageSection>
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.background}
-        containerProps={{
-          id: 'home-4',
-        }}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <OuterWedgeWrapper>
-          <InnerWedgeWrapper top>
-            <WedgeTopLeft />
-          </InnerWedgeWrapper>
-        </OuterWedgeWrapper>
-        <SalesSection {...swapSectionData(t)} />
-      </PageSection>
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.gradientCardHeader}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <OuterWedgeWrapper>
-          <InnerWedgeWrapper width="150%" top>
-            <WedgeTopRight />
-          </InnerWedgeWrapper>
-        </OuterWedgeWrapper>
-        <SalesSection {...earnSectionData(t)} />
-        {/* TODO: until we are enable fetch multi-chain farms */}
-        {chainId === ChainId.BSC && <FarmsPoolsRow />}
-      </PageSection>
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        containerProps={{
-          id: 'home-3',
-        }}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <WinSection />
-      </PageSection>
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.background}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <SalesSection {...cakeSectionData(t)} />
-        <CakeDataRow />
-      </PageSection>
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background="linear-gradient(180deg, #7645D9 0%, #5121B1 100%)"
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <Footer />
-      </PageSection>
+      {account && chainId === ChainId.BSC && (
+        <UserBannerWrapper>
+          <UserBanner />
+        </UserBannerWrapper>
+      )}
+      <StyledHome>
+        <StyledTopSec>
+          <VolumeSection />
+          <StatsSection data={dataStats} />
+          <MyStatsSection data={dataMyStats} />
+        </StyledTopSec>
+        <PairsSection data={dataPairs} />
+      </StyledHome>
     </>
   )
 }

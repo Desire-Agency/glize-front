@@ -82,7 +82,7 @@ const BasicChart = ({
             inputSymbol={inputCurrency?.symbol}
             outputSymbol={outputCurrency?.symbol}
           >
-            <Text color={isChangePositive ? 'success' : 'failure'} fontSize="20px" ml="4px" bold>
+            <Text color={isChangePositive ? 'success' : 'failure'} fontSize="14px" ml="4px" bold>
               {`${isChangePositive ? '+' : ''}${changeValue.toFixed(3)} (${changePercentage}%)`}
             </Text>
           </PairPriceDisplay>
@@ -91,11 +91,11 @@ const BasicChart = ({
           </Text>
         </Flex>
         <Box>
-          <ButtonMenu activeIndex={timeWindow} onItemClick={setTimeWindow} scale="sm">
-            <ButtonMenuItem>{t('24H')}</ButtonMenuItem>
-            <ButtonMenuItem>{t('1W')}</ButtonMenuItem>
-            <ButtonMenuItem>{t('1M')}</ButtonMenuItem>
-            <ButtonMenuItem>{t('1Y')}</ButtonMenuItem>
+          <ButtonMenu activeIndex={timeWindow} onItemClick={setTimeWindow} scale="sm" >
+            <ButtonMenuItem style={{ fontSize: "14px" }}>{t('24H')}</ButtonMenuItem>
+            <ButtonMenuItem style={{ fontSize: "14px" }}>{t('1W')}</ButtonMenuItem>
+            <ButtonMenuItem style={{ fontSize: "14px" }}>{t('1M')}</ButtonMenuItem>
+            <ButtonMenuItem style={{ fontSize: "14px" }}>{t('1Y')}</ButtonMenuItem>
           </ButtonMenu>
         </Box>
       </Flex>

@@ -4,6 +4,7 @@ import HarvestCard from './HarvestCard'
 import UserDetail from './UserDetail'
 
 const StyledCard = styled(Box)`
+  width: 100%;
   border-bottom: 1px ${({ theme }) => theme.colors.secondary} solid;
   border-left: 1px ${({ theme }) => theme.colors.secondary} solid;
   border-right: 1px ${({ theme }) => theme.colors.secondary} solid;
