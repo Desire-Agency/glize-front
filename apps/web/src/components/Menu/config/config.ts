@@ -31,13 +31,7 @@ const config: (
       href: '/swap',
       showItemsOnMobile: false,
       items: [],
-    },
-    {
-      label: t('Liquidity'),
-      href: '/liquidity',
-      showItemsOnMobile: false,
-      items: [],
-    },
+    }, 
     {
       label: t('Farms'),
       href: '/farms',
