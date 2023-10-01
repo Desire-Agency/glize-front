@@ -75,7 +75,7 @@ const BorderCard = styled.div`
   padding: 16px;
 `
 
-const zapSupportedChainId = [ChainId.BSC, ChainId.BSC_TESTNET]
+const zapSupportedChainId = []
 
 export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, currencyIdB }) {
   const router = useRouter()
@@ -83,7 +83,7 @@ export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, cur
   const { isMobile } = useMatchBreakpoints()
 
   const [zapMode] = useZapModeManager()
-  const [temporarilyZapMode, setTemporarilyZapMode] = useState(true)
+  const [temporarilyZapMode, setTemporarilyZapMode] = useState(false)
   const { account, chainId, isWrongNetwork } = useActiveWeb3React()
   const library = useWeb3LibraryContext()
   const { toastError } = useToast()
@@ -179,7 +179,7 @@ export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, cur
       { name: 'verifyingContract', type: 'address' },
     ]
     const domain = {
-      name: 'Pancake LPs',
+      name: 'Gliese LPs',
       version: '1',
       chainId,
       verifyingContract: pair.liquidityToken.address,

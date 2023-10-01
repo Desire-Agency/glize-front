@@ -115,12 +115,12 @@
       "logoURI": "https://pancakeswap.finance/images/tokens/0xA7f552078dcC247C2684336020c03648500C6d9F.png"
     },
     {
-      "name": "PancakeSwap Token",
-      "symbol": "CAKE",
-      "address": "0xFa60D973F7642B748046464e165A65B7323b0DEE",
+      "name": "PanglieseSwap Token",
+      "symbol": "Gliese",
+      "address": "0x749BFD9c423da73696F176578FF8264e47cEF7a3",
       "chainId": 97,
       "decimals": 18,
-      "logoURI": "https://pancakeswap.finance/images/tokens/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82.png"
+      "logoURI": "http://localhost:3000/images/1/tokens/gliese.svg"
     },
     {
       "name": "BUSD Token",

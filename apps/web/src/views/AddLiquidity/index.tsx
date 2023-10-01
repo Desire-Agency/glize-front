@@ -85,7 +85,7 @@ export default function AddLiquidity({ currencyA, currencyB }) {
   const expertMode = useIsExpertMode()
   const zapAddress = getZapAddress(chainId)
 
-  const [temporarilyZapMode, setTemporarilyZapMode] = useState(true)
+  const [temporarilyZapMode, setTemporarilyZapMode] = useState(false)
 
   const [steps, setSteps] = useState(Steps.Choose)
 
