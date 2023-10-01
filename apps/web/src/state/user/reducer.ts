@@ -115,7 +115,7 @@ export const initialState: UserState = {
   userPredictionChainlinkChartDisclaimerShow: true,
   userExpertModeAcknowledgementShow: true,
   userUsernameVisibility: false,
-  userZapDisabled: false,
+  userZapDisabled: true,
   gasPrice: GAS_PRICE_GWEI.rpcDefault,
   watchlistTokens: [],
   watchlistPools: [],
