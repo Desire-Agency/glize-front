@@ -289,7 +289,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
                 scale="md"
               />
             </Flex>
-            <Flex justifyContent="space-between" alignItems="center" mb="24px">
+            {/* <Flex justifyContent="space-between" alignItems="center" mb="24px">
               <Flex alignItems="center">
                 <Text>{t('Use StableSwap by default')}</Text>
                 <QuestionHelper
@@ -312,7 +312,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
                 onChange={(e) => setIsStableSwapByDefault(e.target.checked)}
                 scale="md"
               />
-            </Flex>
+            </Flex> */}
           </>
         )}
       </ScrollableContainer>
