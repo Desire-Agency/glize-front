@@ -19,7 +19,7 @@ export const FACTORY_ADDRESS_MAP: Record<number, string> = {
   [ChainId.ETHEREUM]: FACTORY_ADDRESS_ETH,
   [ChainId.GOERLI]: FACTORY_ADDRESS_ETH,
   [ChainId.BSC]: FACTORY_ADDRESS,
-  [ChainId.BSC_TESTNET]: '0x6725f303b657a9451d8ba641348b6761a6cc7a17',
+  [ChainId.BSC_TESTNET]: '0x5EF3c8F428E8aeAB03DcbB2B940f58ca326DF5f7',
 }
 export const INIT_CODE_HASH = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'
 
@@ -28,7 +28,7 @@ export const INIT_CODE_HASH_MAP: Record<number, string> = {
   [ChainId.ETHEREUM]: INIT_CODE_HASH_ETH,
   [ChainId.GOERLI]: INIT_CODE_HASH_ETH,
   [ChainId.BSC]: INIT_CODE_HASH,
-  [ChainId.BSC_TESTNET]: '0xd0d4c4cd0848c93cb4fd1f498d7013ee6bfb25783ea21593d5834f5d250ece66',
+  [ChainId.BSC_TESTNET]: '0x049696e68f745b7f739ab529d4e842a51d94ffcdaf0d000346d7a7f69a23ba70',
 }
 
 export const WETH9 = {
