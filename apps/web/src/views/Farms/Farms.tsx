@@ -329,7 +329,6 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
           return farms
       }
     }
-
     return sortFarms(chosenFarms).slice(0, numberOfFarmsVisible)
   }, [chosenFarms, sortOption, numberOfFarmsVisible])
 
@@ -374,14 +373,14 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
             </Flex>
             <FarmUI.FarmTabButtons hasStakeInFinishedFarms={stakedInactiveFarms.length > 0} />
             <Flex mt="20px" ml="16px">
-              <FarmTypesFilter
+              {/* <FarmTypesFilter
                 boostedOnly={boostedOnly}
                 handleSetBoostedOnly={setBoostedOnly}
                 stableSwapOnly={stableSwapOnly}
                 handleSetStableSwapOnly={setStableSwapOnly}
                 farmTypesEnableCount={farmTypesEnableCount}
                 handleSetFarmTypesEnableCount={setFarmTypesEnableCount}
-              />
+              /> */}
               <ToggleWrapper>
                 <Toggle
                   id="staked-only-farms"
@@ -436,7 +435,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
             </LabelWrapper>
           </FilterContainer>
         </ControlContainer>
-        {isInactive && (
+        {/* {isInactive && (
           <FinishedTextContainer>
             <Text fontSize={['16px', null, '20px']} color="failure" pr="4px">
               {t("Don't see the farm you are staking?")}
@@ -458,7 +457,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
               </FinishedTextLink>
             </Flex>
           </FinishedTextContainer>
-        )}
+        )} */}
         {viewMode === ViewMode.TABLE ? (
           <Table farms={chosenFarmsMemoized} cakePrice={cakePrice} userDataReady={userDataReady} />
         ) : (

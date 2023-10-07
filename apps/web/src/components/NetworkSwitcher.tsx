@@ -35,7 +35,7 @@ const NetworkSelect = ({ switchNetwork, chainId }) => {
       </Box>
       <UserMenuDivider />
       {chains
-        .filter((chain) => !chain.testnet || chain.id === chainId)
+        // .filter((chain) => !chain.testnet || chain.id === chainId) // TODO: remove comment line when testnet is ready
         .map((chain) => (
           <UserMenuItem
             key={chain.id}

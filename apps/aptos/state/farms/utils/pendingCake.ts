@@ -4,9 +4,9 @@ import { MapFarmResource, FarmResourcePoolInfo } from 'state/farms/types'
 const ACC_CAKE_PRECISION = 1000000000000
 const TOTAL_CAKE_RATE_PRECISION = 100000
 
-export function calcPendingRewardCake(userAmount, userRewardDebt, accCakePerShare) {
+export function calcPendingRewardCake(userAmount, userRewardDebt, accGliesePerShare) {
   // ((user_info.amount * acc_cake_per_share / ACC_CAKE_PRECISION - user_info.reward_debt) as u64)
-  return new BigNumber(userAmount).times(accCakePerShare).dividedBy(ACC_CAKE_PRECISION).minus(userRewardDebt)
+  return new BigNumber(userAmount).times(accGliesePerShare).dividedBy(ACC_CAKE_PRECISION).minus(userRewardDebt)
 }
 
 export function calcRewardCakePerShare(masterChef: MapFarmResource, pid: string | number, getNow: () => number) {
@@ -18,7 +18,7 @@ export function calcRewardCakePerShare(masterChef: MapFarmResource, pid: string 
 
   if (poolInfo) {
     let cakeReward = 0
-    let accCakePerShare = Number(poolInfo.acc_cake_per_share)
+    let accGliesePerShare = Number(poolInfo.acc_cake_per_share)
 
     if (currentTimestamp > lastRewardTimestamp) {
       let totalAllocPoint = 0
@@ -50,9 +50,9 @@ export function calcRewardCakePerShare(masterChef: MapFarmResource, pid: string 
           .div(totalAllocPoint)
         cakeReward = new BigNumber(multiplier).times(reward).div(TOTAL_CAKE_RATE_PRECISION).toNumber()
         const perShare = new BigNumber(cakeReward).times(ACC_CAKE_PRECISION).div(supply)
-        accCakePerShare = new BigNumber(poolInfo.acc_cake_per_share).plus(perShare).toNumber()
+        accGliesePerShare = new BigNumber(poolInfo.acc_cake_per_share).plus(perShare).toNumber()
       }
-      return accCakePerShare
+      return accGliesePerShare
     }
   }
   return 0

@@ -60,10 +60,10 @@ const ColoredIconButton = styled(IconButton)`
       background: -webkit-linear-gradient(
         left,
         ${({ theme }) =>
-          theme.isDark
-            ? `rgba(39,38,44, 0) 0%,
+    theme.isDark
+      ? `rgba(39,38,44, 0) 0%,
         rgba(39,38,44, 0) 100%`
-            : `rgba(255, 255, 255, 0) 0%,
+      : `rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 0.8) 50%,
         rgba(128, 186, 232, 0) 99%,
         rgba(125, 185, 232, 0) 100%`}
@@ -141,32 +141,6 @@ const CurrencyInputHeader: React.FC<React.PropsWithChildren<Props>> = ({
             {isChartDisplayed ? <ChartDisableIcon color="textSubtle" /> : <ChartIcon width="24px" color="textSubtle" />}
           </ColoredIconButton>
         )}
-        <ColoredIconButton
-          variant="text"
-          scale="sm"
-          onClick={() => {
-            if (!isSwapHotTokenDisplay && isChartDisplayed) {
-              toggleChartDisplayed()
-            }
-            setIsSwapHotTokenDisplay(!isSwapHotTokenDisplay)
-          }}
-        >
-          {isSwapHotTokenDisplay ? (
-            <HotDisableIcon color="textSubtle" width="24px" />
-          ) : (
-            <>
-              <TooltipText
-                ref={targetRef}
-                onClick={() => setMobileTooltipShow(false)}
-                display="flex"
-                style={{ justifyContent: 'center' }}
-              >
-                <HotIcon color="textSubtle" width="24px" />
-              </TooltipText>
-              {tooltipVisible && (!isMobile || mobileTooltipShow) && tooltip}
-            </>
-          )}
-        </ColoredIconButton>
         <NotificationDot show={expertMode}>
           <GlobalSettings color="textSubtle" mr="0" mode={SettingsMode.SWAP_LIQUIDITY} />
         </NotificationDot>
