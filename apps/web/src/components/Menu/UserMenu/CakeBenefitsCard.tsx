@@ -153,7 +153,7 @@ const CakeBenefitsCard: React.FC<React.PropsWithChildren<CakeBenefitsCardProps>>
             <Tag variant="secondary" mr="auto">
               <Flex alignItems="center">
                 <Box as={LockIcon} mr="4px" />
-                {t('No CAKE locked')}
+                {t('No Gliese locked')}
               </Flex>
             </Tag>
             <Text fontSize="16px">{cakeBenefits?.lockedCake}</Text>
@@ -161,7 +161,7 @@ const CakeBenefitsCard: React.FC<React.PropsWithChildren<CakeBenefitsCardProps>>
           <Message mt="8px" mb="16px" variant="warning">
             <MessageText maxWidth="200px">
               {t(
-                'Lock CAKE to enjoy the benefits of farm yield boosting, participating in IFOs, voting power boosts, and so much more!',
+                'Lock Gliese to enjoy the benefits of farm yield boosting, participating in IFOs, voting power boosts, and so much more!',
               )}{' '}
               <NextLinkFromReactRouter
                 style={{ textDecoration: 'underline', fontWeight: 'bold' }}
