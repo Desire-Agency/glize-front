@@ -34,6 +34,9 @@ const fetchFarmPublicDataPkg = async ({ pids, chainId, chain }): Promise<[Serial
     isTestnet: chain.testnet,
     farms: farmsCanFetch.concat(priceHelperLpsConfig),
   })
+
+  console.log('farmsWithPrice', farmsWithPrice)
+
   return [farmsWithPrice, poolLength, regularCakePerBlock]
 }
 

@@ -7,7 +7,7 @@ import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import { SECONDS_IN_YEAR } from 'config'
 
 import { CAKE_PID } from 'config/constants'
-import { calcRewardCakePerShare, calcPendingRewardCake } from 'state/farms/utils/pendingCake'
+import { calcRewardCakePerShare, calcPendingRewardCake } from 'state/farms/utils/pendingGliese'
 
 export const getPoolApr = ({ rewardTokenPrice, stakingTokenPrice, tokenPerSecond, totalStaked }) => {
   const totalRewardPricePerYear = new BigNumber(rewardTokenPrice).times(tokenPerSecond).times(SECONDS_IN_YEAR)
@@ -75,8 +75,8 @@ const transformCakePool = ({
   if (_toNumber(userStakedAmount) && _toNumber(totalStaked)) {
     const rewardDebt = _get(userInfo, 'reward_debt', '0')
 
-    const accCakePerShare = calcRewardCakePerShare(masterChefData, CAKE_PID, getNow)
-    const pendingReward = calcPendingRewardCake(userStakedAmount, rewardDebt, accCakePerShare)
+    const accGliesePerShare = calcRewardCakePerShare(masterChefData, CAKE_PID, getNow)
+    const pendingReward = calcPendingRewardCake(userStakedAmount, rewardDebt, accGliesePerShare)
 
     userData = {
       ...userData,

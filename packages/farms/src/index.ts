@@ -14,13 +14,14 @@ export function createFarmFetcher(multicallv2: MultiCallV2) {
     } & Pick<FetchFarmsParams, 'chainId' | 'farms'>,
   ) => {
     const { isTestnet, farms, chainId } = params
+    console.log('fetchFarms', { isTestnet, farms, chainId })
     const masterChefAddress = isTestnet ? masterChefAddresses[ChainId.BSC_TESTNET] : masterChefAddresses[ChainId.BSC]
-    const { poolLength, totalRegularAllocPoint, totalSpecialAllocPoint, cakePerBlock } = await fetchMasterChefV2Data({
+    const { poolLength, totalRegularAllocPoint, totalSpecialAllocPoint, gliesePerBlock } = await fetchMasterChefV2Data({
       isTestnet,
       multicallv2,
       masterChefAddress,
     })
-    const regularCakePerBlock = formatEther(cakePerBlock)
+    const regularCakePerBlock = formatEther(gliesePerBlock)
     const farmsWithPrice = await farmV2FetchFarms({
       multicallv2,
       masterChefAddress,
