@@ -214,7 +214,6 @@ export const fetchMasterChefV2Data = async ({
   multicallv2: MultiCallV2
   masterChefAddress: string
 }) => {
-  console.log('fetchMasterChefV2Data', masterChefAddress)
   try {
     const [[poolLength], [totalRegularAllocPoint], [totalSpecialAllocPoint], [gliesePerBlock]] = await multicallv2<
       [[BigNumber], [BigNumber], [BigNumber], [BigNumber]]

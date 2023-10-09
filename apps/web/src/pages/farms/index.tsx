@@ -32,6 +32,7 @@ const FarmsPage = () => {
   const { address: account } = useAccount()
   const { chosenFarmsMemoized } = useContext(FarmsContext)
   const cakePrice = usePriceCakeBusd()
+
   return (
     <>
       {chosenFarmsMemoized.map((farm) =>
