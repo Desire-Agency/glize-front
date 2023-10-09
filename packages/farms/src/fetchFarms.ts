@@ -26,7 +26,7 @@ const evmNativeStableLpMap = {
     stable: 'BUSD',
   },
   [ChainId.BSC_TESTNET]: {
-    address: '0x4E96D2e92680Ca65D58A0e2eB5bd1c0f44cAB897',
+    address: '0x1b2c3ffb9BdA5b9F6F1a81149196138ff7a6AC0B',
     wNative: 'WBNB',
     stable: 'BUSD',
   },
@@ -214,7 +214,6 @@ export const fetchMasterChefV2Data = async ({
   multicallv2: MultiCallV2
   masterChefAddress: string
 }) => {
-  console.log('fetchMasterChefV2Data', masterChefAddress)
   try {
     const [[poolLength], [totalRegularAllocPoint], [totalSpecialAllocPoint], [gliesePerBlock]] = await multicallv2<
       [[BigNumber], [BigNumber], [BigNumber], [BigNumber]]

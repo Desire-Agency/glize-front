@@ -35,8 +35,6 @@ const fetchFarmPublicDataPkg = async ({ pids, chainId, chain }): Promise<[Serial
     farms: farmsCanFetch.concat(priceHelperLpsConfig),
   })
 
-  console.log('farmsWithPrice', farmsWithPrice)
-
   return [farmsWithPrice, poolLength, regularCakePerBlock]
 }
 
@@ -195,6 +193,7 @@ export const fetchFarmUserDataAsync = createAsyncThunk<
     if (state.farms.chainId !== chainId) {
       await dispatch(fetchInitialFarmsData({ chainId }))
     }
+    console.log('state.farms', state.farms)
     const poolLength = state.farms.poolLength ?? (await fetchMasterChefFarmPoolLength(ChainId.BSC))
     const farmsConfig = await getFarmConfig(chainId)
     const farmsCanFetch = farmsConfig.filter(
