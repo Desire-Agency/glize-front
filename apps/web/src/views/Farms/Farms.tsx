@@ -346,9 +346,6 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   const providerValue = useMemo(() => ({ chosenFarmsMemoized }), [chosenFarmsMemoized])
 
-  // const { data: farmsLP, userDataLoaded, poolLength, regularCakePerBlock } = useFarms()
-  console.log('farmsLP', farmsLP)
-
   return (
     <FarmsContext.Provider value={providerValue}>
       <PageHeader>

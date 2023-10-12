@@ -77,12 +77,12 @@ const RoiCalculatorFooter: React.FC<React.PropsWithChildren<RoiCalculatorFooterP
         <>
           <Text>
             {t(
-              "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each second."
+              "The Multiplier represents the proportion of GLIESE rewards each farm receives, as a proportion of the GLIESE produced each second."
             )}
           </Text>
           <Text my="24px">
             {" "}
-            {t("For example, if a 1x farm received 1 CAKE per second, a 40x farm would receive 40 CAKE per second.")}
+            {t("For example, if a 1x farm received 1 GLIESE per second, a 40x farm would receive 40 GLIESE per second.")}
           </Text>
           <Text>{t("This amount is already included in all APR calculations for the farm.")}</Text>
         </>
@@ -90,26 +90,18 @@ const RoiCalculatorFooter: React.FC<React.PropsWithChildren<RoiCalculatorFooterP
         <>
           <Text>
             {t(
-              "The Multiplier represents the proportion of CAKE rewards each farm receives, as a proportion of the CAKE produced each block."
+              "The Multiplier represents the proportion of GLIESE rewards each farm receives, as a proportion of the GLIESE produced each block."
             )}
           </Text>
           <Text my="24px">
             {" "}
-            {t("For example, if a 1x farm received 1 CAKE per block, a 40x farm would receive 40 CAKE per block.")}
+            {t("For example, if a 1x farm received 1 GLIESE per block, a 40x farm would receive 40 GLIESE per block.")}
           </Text>
           <Text>
             {t(
-              "We have recently rebased multipliers by a factor of 10, this is only a visual change and does not affect the amount of CAKE each farm receives."
+              "We have recently rebased multipliers by a factor of 10, this is only a visual change and does not affect the amount of GLIESE each farm receives."
             )}
           </Text>
-          <Link
-            mt="8px"
-            display="inline"
-            href="https://medium.com/pancakeswap/farm-mutlipliers-visual-update-1f5f5f615afd"
-            external
-          >
-            {t("Read more")}
-          </Link>
         </>
       )}
     </>,
@@ -154,7 +146,7 @@ const RoiCalculatorFooter: React.FC<React.PropsWithChildren<RoiCalculatorFooterP
                   {displayApr}%
                 </Text>
                 <Text color="textSubtle" small>
-                  *{t("Base APR (CAKE yield only)")}
+                  *{t("Base APR (GLIESE yield only)")}
                 </Text>
                 <Text small textAlign="right">
                   {apr.toFixed(2)}%
@@ -214,21 +206,6 @@ const RoiCalculatorFooter: React.FC<React.PropsWithChildren<RoiCalculatorFooterP
                     })}
                   </Text>
                 </li>
-                <li>
-                  <Text fontSize="12px" textAlign="center" color="textSubtle" display="inline">
-                    {t(
-                      "To provide stable estimates, APR figures are calculated once per day on the farm page. For real time APR, please visit the"
-                    )}
-                    <Link
-                      style={{ display: "inline-block" }}
-                      fontSize="12px"
-                      ml="3px"
-                      href={`/info${stableSwapAddress ? `/pairs/${stableSwapAddress}?type=stableSwap` : ""}`}
-                    >
-                      {t("Info Page")}
-                    </Link>
-                  </Text>
-                </li>
               </>
             )}
             <li>
@@ -248,11 +225,6 @@ const RoiCalculatorFooter: React.FC<React.PropsWithChildren<RoiCalculatorFooterP
               </li>
             )}
           </BulletList>
-          {linkHref && (
-            <Flex justifyContent="center" mt="24px">
-              <LinkExternal href={linkHref}>{linkLabel}</LinkExternal>
-            </Flex>
-          )}
         </Box>
       )}
     </Footer>

@@ -199,16 +199,16 @@ export const fetchFarmUserDataAsync = createAsyncThunk<
     const farmsCanFetch = farmsConfig.filter(
       (farmConfig) => pids.includes(farmConfig.pid) && poolLength > farmConfig.pid,
     )
-    if (proxyAddress && farmsCanFetch?.length && verifyBscNetwork(chainId)) {
-      const { normalFarms, farmsWithProxy } = splitProxyFarms(farmsCanFetch)
+    // if (proxyAddress && farmsCanFetch?.length && verifyBscNetwork(chainId)) {
+    //   const { normalFarms, farmsWithProxy } = splitProxyFarms(farmsCanFetch)
 
-      const [proxyAllowances, normalAllowances] = await Promise.all([
-        getBoostedFarmsStakeValue(farmsWithProxy, account, chainId, proxyAddress),
-        getNormalFarmsStakeValue(normalFarms, account, chainId),
-      ])
+    //   const [proxyAllowances, normalAllowances] = await Promise.all([
+    //     getBoostedFarmsStakeValue(farmsWithProxy, account, chainId, proxyAddress),
+    //     getNormalFarmsStakeValue(normalFarms, account, chainId),
+    //   ])
 
-      return [...proxyAllowances, ...normalAllowances]
-    }
+    //   return [...proxyAllowances, ...normalAllowances]
+    // }
 
     return getNormalFarmsStakeValue(farmsCanFetch, account, chainId)
   },

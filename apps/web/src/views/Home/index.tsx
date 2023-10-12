@@ -17,6 +17,8 @@ import { formatBigNumber, getFullDisplayBalance } from '@pancakeswap/utils/forma
 import { useBalance } from 'wagmi'
 import useNativeCurrency from 'hooks/useNativeCurrency'
 import { FetchStatus } from 'config/constants/types'
+import { useFarms, usePollFarmsWithUserData } from 'state/farms/hooks'
+import BigNumber from 'bignumber.js'
 
 const StyledHome = styled(Flex)`
   padding-left: 16px;
@@ -58,6 +60,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
   const { address: account } = useAccount()
   const { chainId } = useActiveChainId()
   const { t } = useTranslation()
+  const { data: farmsLP, userDataLoaded, poolLength, regularCakePerBlock } = useFarms()
 
   const isBSC = chainId === ChainId.BSC
   const native = useNativeCurrency()
@@ -67,6 +70,20 @@ const Home: React.FC<React.PropsWithChildren> = () => {
 
   const nativeBalanceOutput = nativeBalance.isFetched ? formatBigNumber(nativeBalance.data.value, 6) : "0"
   const cakeBalanceOutput = cakeFetchStatus == FetchStatus.Fetched ? getFullDisplayBalance(cakeBalance, 18, 6) : "0"
+
+  const totalEarnings = useMemo(() => {
+    let total = new BigNumber(0)
+    if (userDataLoaded) {
+      for (let i = 0; i < farmsLP.length; i++) {
+        total = total.plus(farmsLP[i]?.userData?.earnings)
+        console.log("total", total.toFixed(6))
+      }
+    }
+
+    return getFullDisplayBalance(total, 18, 6)
+  }, [farmsLP, userDataLoaded])
+
+  usePollFarmsWithUserData()
 
   const [dataStats, setDataStats] = useState([
     { label: t('Price'), val: "$ 0.00000" },
@@ -78,8 +95,8 @@ const Home: React.FC<React.PropsWithChildren> = () => {
   const dataMyStats = [
       { label: `${native.symbol} ${t('Balance')}`, values: [`${nativeBalanceOutput}`] },
       { label: t('Gliese Balance'), values: [`${cakeBalanceOutput}`] },
-      { label: t('My Farm Rewards'), values: ["0"] },
-      { label: t('My Gliese Locked'), values: ["0"] },
+      { label: t('My Farm Rewards'), values: [`${totalEarnings} GLIESE`] },
+      // { label: t('My Gliese Locked'), values: ["0"] },
   ]
 
   // const [dataPairs, setDataPairs] = useState<ITablePairRow[]>([
