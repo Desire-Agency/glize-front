@@ -50,14 +50,6 @@ const TotalStaked: React.FC<React.PropsWithChildren<MultiplierProps>> = ({ multi
           'We have recently rebased multipliers by a factor of 10, this is only a visual change and does not affect the amount of GLIESE each farm receives.',
         )}
       </Text>
-      <Link
-        mt="8px"
-        display="inline"
-        href="https://medium.com/pancakeswap/farm-mutlipliers-visual-update-1f5f5f615afd"
-        external
-      >
-        {t('Read more')}
-      </Link>
     </>
   )
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, {
