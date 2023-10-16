@@ -44,12 +44,12 @@ const config: (
       showItemsOnMobile: false,
       items: [],
     },
-    {
-      label: t('Pools'),
-      href: '/pools',
-      showItemsOnMobile: false,
-      items: [],
-    },
+    // {
+    //   label: t('Pools'),
+    //   href: '/pools',
+    //   showItemsOnMobile: false,
+    //   items: [],
+    // },
   ].map((item) => addMenuItemSupported(item, chainId))
 
 export default config

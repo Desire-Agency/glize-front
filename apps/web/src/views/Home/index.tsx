@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { Flex } from '@pancakeswap/uikit'
+import { Flex, BottomDrawer, useMatchBreakpoints } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import { useAccount } from 'wagmi'
 import { useActiveChainId } from 'hooks/useActiveChainId'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, Currency } from '@pancakeswap/sdk'
 import { CAKE } from '@pancakeswap/tokens'
 import UserBanner from './components/UserBanner'
 import VolumeSection from './components/VolumeSection'
@@ -19,6 +19,7 @@ import useNativeCurrency from 'hooks/useNativeCurrency'
 import { FetchStatus } from 'config/constants/types'
 import { useFarms, usePollFarmsWithUserData } from 'state/farms/hooks'
 import BigNumber from 'bignumber.js'
+import PriceChartContainer from './components/Chart/PriceChartContainer'
 
 const StyledHome = styled(Flex)`
   padding-left: 16px;
@@ -57,10 +58,12 @@ const UserBannerWrapper = styled(Flex)`
 `
 
 const Home: React.FC<React.PropsWithChildren> = () => {
+  const { isDesktop } = useMatchBreakpoints()
   const { address: account } = useAccount()
   const { chainId } = useActiveChainId()
   const { t } = useTranslation()
   const { data: farmsLP, userDataLoaded, poolLength, regularCakePerBlock } = useFarms()
+  const [isChartExpanded, setIsChartExpanded] = useState(false)
 
   const isBSC = chainId === ChainId.BSC
   const native = useNativeCurrency()
@@ -93,10 +96,10 @@ const Home: React.FC<React.PropsWithChildren> = () => {
   ])
 
   const dataMyStats = [
-      { label: `${native.symbol} ${t('Balance')}`, values: [`${nativeBalanceOutput}`] },
-      { label: t('Gliese Balance'), values: [`${cakeBalanceOutput}`] },
-      { label: t('My Farm Rewards'), values: [`${totalEarnings} GLIESE`] },
-      // { label: t('My Gliese Locked'), values: ["0"] },
+    { label: `${native.symbol} ${t('Balance')}`, values: [`${nativeBalanceOutput}`] },
+    { label: t('Gliese Balance'), values: [`${cakeBalanceOutput}`] },
+    { label: t('My Farm Rewards'), values: [`${totalEarnings} GLIESE`] },
+    // { label: t('My Gliese Locked'), values: ["0"] },
   ]
 
   // const [dataPairs, setDataPairs] = useState<ITablePairRow[]>([
@@ -124,6 +127,30 @@ const Home: React.FC<React.PropsWithChildren> = () => {
     )();
   }, [isTestnet])
 
+  const chartData = {
+    inputCurrencyId: "BNB",
+    inputCurrency: {
+      chainId: 56,
+      decimals: 18,
+      symbol: "BNB",
+      name: "Binance Chain Native Token",
+      isNative: true,
+      isToken: false
+    },
+    outputCurrencyId: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+    outputCurrency: {
+      chainId: 56,
+      decimals: 18,
+      symbol: "GLIESE",
+      name: "Gliese Token",
+      isNative: false,
+      isToken: true,
+      address: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+      logoURI: "/images/97/tokens/0x749BFD9c423da73696F176578FF8264e47cEF7a3.png"
+    },
+    currentSwapPrice: null
+  }
+
   return (
     <>
       {account && chainId === ChainId.BSC && (
@@ -133,6 +160,21 @@ const Home: React.FC<React.PropsWithChildren> = () => {
       )}
       <StyledHome>
         <StyledTopSec>
+        <Flex width={['328px', '100%']} height="100%" justifyContent="center" position="relative" alignItems="flex-start">
+          {isDesktop && (
+            <PriceChartContainer
+              inputCurrencyId={chartData.inputCurrencyId}
+              inputCurrency={chartData.inputCurrency as Currency}
+              outputCurrencyId={chartData.outputCurrencyId}
+              outputCurrency={chartData.outputCurrency as unknown as Currency}
+              isChartExpanded={isChartExpanded}
+              setIsChartExpanded={setIsChartExpanded}
+              isChartDisplayed={true}
+              currentSwapPrice={chartData.currentSwapPrice}
+            />
+          )}
+          </Flex>
+
           {/* <VolumeSection /> */}
           <StatsSection data={dataStats} />
           <MyStatsSection data={dataMyStats} />

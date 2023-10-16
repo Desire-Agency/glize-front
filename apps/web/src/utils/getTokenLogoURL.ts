@@ -9,6 +9,7 @@ const mapping = {
 
 const getTokenLogoURL = memoize(
   (token?: Token) => {
+    if (token && token.symbol === 'GLIESE') return '/images/97/tokens/0x749BFD9c423da73696F176578FF8264e47cEF7a3.png'
     if (token && mapping[token.chainId]) {
       return `https://assets-cdn.trustwallet.com/blockchains/${mapping[token.chainId]}/assets/${getAddress(
         token.address,

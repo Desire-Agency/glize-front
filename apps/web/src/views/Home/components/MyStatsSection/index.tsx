@@ -7,6 +7,7 @@ import { useAccount } from 'wagmi'
 
 const StyledWrapSection = styled(Flex)`
   border-radius: 20px;
+  padding: 20px;
   flex-direction: column;
   background: ${({ theme }) => theme.colors.tertiary};
   width: 100%;
@@ -14,6 +15,7 @@ const StyledWrapSection = styled(Flex)`
 
   ${({ theme }) => theme.mediaQueries.xl} {
     border-radius: 40px;
+    padding: 30px;
   }
 `
 
@@ -40,15 +42,6 @@ const StyledSectionWallet = styled(Flex)`
   }
 `
 
-const StyledHeading = styled(Heading)`
-  margin: 20px;
-
-  ${({ theme }) => theme.mediaQueries.xl} {
-    margin: 30px;
-    margin-bottom: 20px;
-  }
-`
-
 const StyledItem = styled(Flex)`
   position: relative;
   width: 100%;
@@ -71,9 +64,8 @@ const MyStatsSection = ({ data }: Props) => {
   const { address: account } = useAccount()
 
   return (
-    <StyledWrapSection>
-      <StyledHeading mb={30} scale="xl" style={{ fontWeight: "500" }}>{t('My Stats')}</StyledHeading>
-      <StyledItem>
+    <StyledWrapSection style={{position: "relative"}}>
+      <Heading mb={30} scale="xl" style={{ fontWeight: "500", zIndex: 1000 }}>{t('My Stats')}</Heading>
         {!account &&
           <StyledSectionWallet>
             <ConnectWalletButton scale="sm">
@@ -92,7 +84,6 @@ const MyStatsSection = ({ data }: Props) => {
             </Flex>
           ))}
         </Flex>
-      </StyledItem>
     </StyledWrapSection>
   )
 }
